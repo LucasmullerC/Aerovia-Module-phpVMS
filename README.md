@@ -4,7 +4,7 @@
 # 
 #### A fork of [DisposableBasic](https://github.com/FatihKoz/DisposableBasic) focusing on customizing and adding new features for Aerovia Virtual Airline.
 
-![https://aeroviavirtual.com.br/](https://img.shields.io/badge/Website-Aerovia-darkblue.svg)
+[![Aerovia Brasil Website](https://img.shields.io/badge/Website-Aerovia-darkblue.svg)](https://aeroviavirtual.com.br/)
 [![Discord Chat](https://img.shields.io/discord/1053127521337622549.svg)](https://discord.gg/cC36Cj22xZ)  
 </div>
 
