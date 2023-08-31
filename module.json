@@ -1,0 +1,15 @@
+{
+    "name": "DisposableBasic",
+    "alias": "disposablebasic",
+    "description": "phpVMS v7 module for Basic VA features",
+    "keywords": [],
+    "active": 0,
+    "order": 9001,
+    "providers": [
+        "Modules\\DisposableBasic\\Providers\\DB_ServiceProvider",
+        "Modules\\DisposableBasic\\Providers\\DB_EventProvider"
+    ],
+    "aliases": {},
+    "files": ["db_helpers.php", "db_helpers_tech.php"],
+    "requires": []
+}
