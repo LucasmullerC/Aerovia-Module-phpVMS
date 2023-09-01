@@ -6,7 +6,8 @@
     {{-- Left --}}
     <div class="col-lg-5">
       @include('DBasic::fleet.aircraft_details')
-
+      
+      @widget('DBasic::Map', ['source' => 'aircraft','uid' => $aircraft->id])
       @widget('DBasic::FuelCalculator', ['aircraft' => $aircraft->id])
 
       @if($image)
@@ -56,9 +57,10 @@
             @include('DBasic::pireps.table', ['ac_page' => true])
           </div>
           <div class="card-footer p-0 px-1 small text-end">
-            <b>@lang('DBasic::common.latest') {{ $pireps->count() }}</b>
+            @lang('DBasic::common.paginate', ['first' => $pireps->firstItem(), 'last' => $pireps->lastItem(), 'total' => $pireps->total()])
           </div>
         </div>
+        {{ $pireps->links('pagination.default') }}
       @endif
 
       <div class="row row-cols-lg-2">

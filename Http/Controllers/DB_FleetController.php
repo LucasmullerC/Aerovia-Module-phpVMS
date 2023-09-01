@@ -113,7 +113,7 @@ class DB_FleetController extends Controller
         $where = ['aircraft_id' => $aircraft->id, 'state' => 2];
         $with_pirep = ['dpt_airport', 'arr_airport', 'user', 'airline'];
 
-        $pireps = Pirep::with($with_pirep)->where($where)->orderby('submitted_at', 'desc')->take(5)->get();
+        $pireps = Pirep::with($with_pirep)->where($where)->orderby('submitted_at', 'desc')->paginate(10);
 
         // Aircraft or Subfleet Image
         $FleetSvc = app(DB_FleetServices::class);

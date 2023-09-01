@@ -44,7 +44,7 @@
         <td class="text-start">
           <a href="{{ route('frontend.airports.show', [$pirep->dpt_airport_id]) }}" title="{{ optional($pirep->dpt_airport)->name }}">
             @if(empty($compact_view))
-              {{ optional($pirep->dpt_airport)->full_name ?? $pirep->dpt_airport_id }}</a>
+              {{$pirep->dpt_airport_id }}</a>
             @else 
               {{ $pirep->dpt_airport_id }}
             @endif
@@ -52,7 +52,7 @@
         <td class="text-start">
           <a href="{{ route('frontend.airports.show', [$pirep->arr_airport_id]) }}" title="{{ optional($pirep->arr_airport)->name }}">
             @if(empty($compact_view))
-              {{ optional($pirep->arr_airport)->full_name ?? $pirep->arr_airport_id }}</a>
+              {{ $pirep->arr_airport_id }}</a>
             @else 
               {{ $pirep->arr_airport_id }}
             @endif

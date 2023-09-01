@@ -64,6 +64,10 @@ class Map extends Widget
             $type = 'fleet';
         } elseif ($this->config['source'] === 'assignment') {
             $type = 'assignment';
+        }
+         elseif ($this->config['source'] === 'aircraft') {
+            $type = 'aircraft';
+            $aircraft_id = $this->config['uid'];
         } else {
             $airport_id = $this->config['source'];
             $type = 'airport';
@@ -88,6 +92,10 @@ class Map extends Widget
         // Filter flights to selected airline
         if ($type === 'airline') {
             $where['airline_id'] = $airline_id;
+        }
+        
+        if($type = 'aircraft'){
+            $where['aircraft_id'] = 1;
         }
 
         // Filter Flights To User's Current Location
@@ -114,6 +122,15 @@ class Map extends Widget
             $mapflights = Pirep::with($eager_load)
                 ->select('id', 'airline_id', 'flight_number', 'dpt_airport_id', 'arr_airport_id')
                 ->where(['user_id' => $this->config['uid'], 'state' => 2])
+                ->orderby('submitted_at', 'desc')
+                ->when(is_numeric($take_limit), function ($query) use ($take_limit) {
+                    return $query->take($take_limit);
+                })->get();
+        }
+        elseif ($type === 'aircraft') {
+            $mapflights = Pirep::with($eager_load)
+                ->select('id', 'airline_id', 'flight_number', 'dpt_airport_id', 'arr_airport_id')
+                ->where(['aircraft_id' => $aircraft_id, 'state' => 2])
                 ->orderby('submitted_at', 'desc')
                 ->when(is_numeric($take_limit), function ($query) use ($take_limit) {
                     return $query->take($take_limit);
@@ -175,6 +192,7 @@ class Map extends Widget
                 ->when(is_numeric($take_limit), function ($query) use ($take_limit) {
                     return $query->take($take_limit);
                 })->get();
+
         }
 
         // Fleet Locations Map
