@@ -1,4 +1,4 @@
-@extends('blank')
+@extends('app')
 @section('title', __('DBasic::common.awards'))
 
 @section('content')

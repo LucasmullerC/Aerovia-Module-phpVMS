@@ -6,7 +6,7 @@
     {{-- Left --}}
     <div class="col-lg-5">
       @include('DBasic::fleet.aircraft_details')
-      
+    
       @widget('DBasic::Map', ['source' => 'aircraft','uid' => $aircraft->id])
       @widget('DBasic::FuelCalculator', ['aircraft' => $aircraft->id])
 
@@ -54,7 +54,7 @@
             </h5>
           </div>
           <div class="card-body p-0 overflow-auto table-responsive">
-            @include('DBasic::pireps.table', ['ac_page' => true])
+            @include('DBasic::pireps.table_compact', ['ac_page' => true])
           </div>
           <div class="card-footer p-0 px-1 small text-end">
             @lang('DBasic::common.paginate', ['first' => $pireps->firstItem(), 'last' => $pireps->lastItem(), 'total' => $pireps->total()])

@@ -1,38 +1,47 @@
 <table class="table table-sm table-borderless table-striped align-middle text-center text-nowrap mb-0">
   <tr>
-    <th class="text-start">@lang('DBasic::common.reg')</th>
-    <th>@lang('DBasic::common.icao')</th>
+    <th class="text-start">@sortablelink('registration', __('DBasic::common.reg'))</th>
+    <th class="text-start">@sortablelink('icao', __('DBasic::common.icao'))</th>
     @empty($compact_view)
-      <th>@lang('DBasic::common.airline')</th>
-      <th>@lang('DBasic::common.subfleet')</th>
+      <th class="text-start">@sortablelink('name', __('DBasic::common.name'))</th>
+      <th class="text-start">@sortablelink('fin', 'FIN')</th>
+      @empty($airline_view)
+        <th>@lang('DBasic::common.airline')</th>
+      @endempty
+      <th>@sortablelink('subfleet.name', __('DBasic::common.subfleet'))</th>
     @endempty
     @empty($hub_ac)
       <th>@lang('DBasic::common.base')</th>
     @endempty
     @empty($visitor_ac)
-      <th>@lang('DBasic::common.location')</th>
+      <th>@sortablelink('airport_id', __('DBasic::common.location'))</th>
     @endempty
-    <th>@lang('DBasic::common.fuelob')</th>
-    <th>@lang('DBasic::common.btime')</th>
+    <th>@sortablelink('fuel_onboard', __('DBasic::common.fuelob'))</th>
+    <th>@sortablelink('flight_time', __('DBasic::common.btime'))</th>
     <th>@lang('DBasic::common.lastlnd')</th>
-    <th>@lang('DBasic::common.state')</th>
-    <th>@lang('DBasic::common.status')</th>
+    <th>@sortablelink('state', __('DBasic::common.state'))</th>
+    <th>@sortablelink('status', __('DBasic::common.status'))</th>
   </tr>
   @foreach($aircraft as $ac)
     <tr @if($ac->simbriefs_count > 0) class="table-primary" @endif>
       <td class="text-start">
-        <a href="{{ route('DBasic.aircraft', [$ac->registration]) }}" target="_blank">
-          {{ $ac->registration }}
-          @if($ac->registration != $ac->name) '{{ $ac->name }}' @endif
-        </a>
+        <a href="{{ route('DBasic.aircraft', [$ac->registration]) }}" target="_blank">{{ $ac->registration }}</a>
       </td>
-      <td>{{ $ac->icao }}</td>
+      <td class="text-start">{{ $ac->icao }}</td>
       @empty($compact_view)
-        <td>
-          <a href="{{ route('DBasic.airline', [$ac->airline->icao ?? '']) }}" target="_blank">
-            {{ $ac->airline->name ?? '' }}
-          </a>
+        <td class="text-start">
+          @if($ac->registration != $ac->name)
+            {{ $ac->name }}
+          @endif
         </td>
+        <td class="text-start">{{ $ac->fin }}</td>
+        @empty($airline_view)
+          <td>
+            <a href="{{ route('DBasic.airline', [$ac->airline->icao ?? '']) }}" target="_blank">
+              {{ $ac->airline->name ?? '' }}
+            </a>
+          </td>
+        @endempty
         <td>
           <a href="{{ route('DBasic.subfleet', [$ac->subfleet->type ?? '']) }}" target="_blank">
             {{ $ac->subfleet->name ?? '' }}
@@ -42,7 +51,7 @@
       @empty($hub_ac)
         <td>
           @if(filled($ac->hub_id))
-            <a href="{{ route('DBasic.hub', [$ac->hub_id ?? '']) }}" target="_blank">
+            <a href="{{ route('DBasic.hub', [$ac->hub_id ?? '']) }}">
               {{ $ac->hub_id ?? '' }}
             </a>
           @else          

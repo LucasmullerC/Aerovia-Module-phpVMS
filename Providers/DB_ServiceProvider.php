@@ -51,6 +51,8 @@ class DB_ServiceProvider extends ServiceProvider
             Route::get('dairlines', 'DB_AirlineController@index')->name('airlines');
             Route::get('dairlines/{icao}', 'DB_AirlineController@show')->name('airline');
             Route::get('dairline/{id}', 'DB_AirlineController@myairline')->name('myairline');
+            // Awards
+            Route::get('dawards', 'DB_AwardController@index')->name('awards');
             // Fleet
             Route::get('dfleet', 'DB_FleetController@index')->name('fleet');
             Route::get('dfleet/{subfleet_type}', 'DB_FleetController@subfleet')->name('subfleet');
@@ -84,18 +86,16 @@ class DB_ServiceProvider extends ServiceProvider
             'namespace'  => 'Modules\DisposableBasic\Http\Controllers',
             'prefix'     => '',
         ], function () {
+            // Public Pages (for IVAO/VATSIM Audits)
+            Route::get('dreports', 'DB_PirepController@index')->name('reports');
+            Route::get('dstatistics', 'DB_StatisticController@index')->name('statistics');
             // Plain Pages
+            Route::get('dpfleet', 'DB_FleetController@index')->name('fleet');
             Route::get('dp_roster', 'DB_WebController@roster')->name('dp_roster');
             Route::get('dp_stats', 'DB_WebController@stats')->name('dp_stats');
-            Route::get('dp_fleet', 'DB_WebController@fleet')->name('dp_fleet');
             Route::get('dp_page', 'DB_WebController@page')->name('dp_page');
             Route::get('dp_pireps', 'DB_WebController@pireps')->name('dp_pireps');
             
-            Route::get('dpfleet', 'DB_FleetController@index')->name('fleet');
-            Route::get('dpfleet/{subfleet_type}', 'DB_FleetController@subfleet')->name('subfleet');
-            Route::get('dpaircraft/{ac_reg}', 'DB_FleetController@aircraft')->name('aircraft');
-            // Awards
-            Route::get('dawards', 'DB_AwardController@index')->name('awards');
             Route::get('livemaphook', function() {
             	return view('layouts.aerovia.livemaphook.index');
             })->name('livemap_page');

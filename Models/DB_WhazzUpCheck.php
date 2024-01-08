@@ -13,14 +13,16 @@ class DB_WhazzUpCheck extends Model
         'pirep_id',
         'network',
         'is_online',
+        'callsign',
     ];
 
     // Validation rules
     public static $rules = [
-        'user_id'     => 'required',
-        'pirep_id'    => 'required',
-        'network'     => 'required',
-        'is_online'   => 'required',
+        'user_id'   => 'required',
+        'pirep_id'  => 'required',
+        'network'   => 'required',
+        'is_online' => 'required',
+        'callsign'  => 'nullable',
     ];
 
     // Relationships

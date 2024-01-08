@@ -78,6 +78,10 @@ return [
     'stats_rep'  => 'Estatísticas do PIREP',
     'pireps_ack' => 'Pireps (Aceitos)',
     'pireps_rej' => 'Pireps (Rejeitados)',
+    'pireps_pax' => 'Total de Passengeiros',
+    'avg_pax'    => 'Média de Passageiros',
+    'pireps_cgo' => 'Total de Carga',
+    'avg_cgo'    => 'Média de Carga',
     'atime'      => 'Tempo de Voo Médio',
     'ttime'      => 'Tempo de Voo Total',
     'afuel'      => 'Média de Combustível Consumido',
@@ -123,6 +127,7 @@ return [
     'airline_map'  => 'Mapa de Voos da Cia',
     'assignm_map'  => 'Mapa da Escala Mensal',
     'citypairs'    => 'Pares de Cidades',
+    'aerodr_map'   => 'Mapa de Aeroportos',
     'airports'     => 'Aeroportos',
     'hubs'         => 'Hubs',
 ];

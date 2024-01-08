@@ -4,6 +4,7 @@
 @section('content')
   <div class="row">
     <div class="col mt-1">
+      {{-- Use as you wish --}}
     </div>
   </div>
 @endsection

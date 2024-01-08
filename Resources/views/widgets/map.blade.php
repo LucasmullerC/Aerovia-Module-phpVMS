@@ -26,9 +26,9 @@
   @section('scripts')
     @parent
     {{-- Map Leaflet Script --}}
-        <script src="https://elfalem.github.io/Leaflet.curve/src/leaflet.curve.js"></script>
+    <script src="https://elfalem.github.io/Leaflet.curve/src/leaflet.curve.js"></script>
     <script type="text/javascript">
-// Build Icons
+        // Build Icons
         var RedIcon = new L.Icon({!! $mapIcons['RedIcon'] !!});
         var GreenIcon = new L.Icon({!! $mapIcons['GreenIcon'] !!});
         var BlueIcon = new L.Icon({!! $mapIcons['BlueIcon'] !!});
@@ -41,14 +41,13 @@
           var HUB_{{ $hub['id'] }} = L.marker([{{ $hub['loc'] }}], {icon: GreenIcon , opacity: 0.8}).bindPopup({!! "'".$hub['pop']."'" !!}).addTo(mHubs).addTo(mBoundary);
         @endforeach
         @foreach ($mapAirports as $airport)
-          var APT_{{ $airport['id'] }} = L.marker([{{ $airport['loc'] }}], {icon: BlueIcon , opacity: 0.8}).bindPopup({!! "'".$airport['pop']."'" !!}).addTo(mAirports).addTo(mBoundary);
+          var APT_{{ $airport['id'] }} = L.marker([{{ $airport['loc'] }}], {icon: BlueIcon , opacity: 0.8}).bindPopup({!! "'".$airport['pop']."'" !!}).addTo(mAirports)@if($mapsource === 'aerodromes' && $loop->first || $mapsource === 'aerodromes' && $loop->last).addTo(mBoundary)@elseif($mapsource != 'aerodromes').addTo(mBoundary)@endif;
         @endforeach
         // Build City Pairs / Flights Layer Group
         @if(count($mapCityPairs) > 0)
           var mFlights = L.layerGroup();
           @foreach ($mapCityPairs as $citypair)
             @if($citypair['pop'])
-              //var FLT_{{ $citypair['name'] }} = L.geodesic([{{ $citypair['geod'] }}], {opacity: 0.8, steps: 5, color: '{{$citypair['geoc']}}'}).bindPopup({!! "'".$citypair['pop']."'" !!}).addTo(mFlights);
             //CURVA
             var latlngs = [];
             
@@ -116,4 +115,3 @@
     </script>
   @endsection
 @endif
-
