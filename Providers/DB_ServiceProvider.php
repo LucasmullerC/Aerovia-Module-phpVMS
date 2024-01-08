@@ -96,6 +96,9 @@ class DB_ServiceProvider extends ServiceProvider
             Route::get('dpaircraft/{ac_reg}', 'DB_FleetController@aircraft')->name('aircraft');
             // Awards
             Route::get('dawards', 'DB_AwardController@index')->name('awards');
+            Route::get('livemaphook', function() {
+            	return view('layouts.aerovia.livemaphook.index');
+            })->name('livemap_page');
         });
 
         // API Public
