@@ -129,7 +129,7 @@ class Map extends Widget
         if ($type === 'user') {
             $mapflights = Pirep::with($eager_load)
                 ->select('id', 'airline_id', 'flight_number', 'dpt_airport_id', 'arr_airport_id')
-                ->where(['user_id' => $user->id, 'state' => PirepState::ACCEPTED])
+                ->where(['user_id' => $this->config['uid'], 'state' => PirepState::ACCEPTED])
                 ->orderby('submitted_at', 'desc')
                 ->when(is_numeric($take_limit), function ($query) use ($take_limit) {
                     return $query->take($take_limit);
