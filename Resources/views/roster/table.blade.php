@@ -26,19 +26,19 @@
   @foreach($users as $user)
     <tr @if(empty($state_badge) && $user->state != 1) {!! DB_UserState($user, 'row') !!} @endif>
       <td>
-        <a href="{{ route('frontend.users.show.public', [$user->id]) }}">{{ $user->name_private }}</a>
+        <a href="{{ route('frontend.users.show.public', [$user->id]) }}" target="_blank">{{ $user->name_private }}</a>
       </td>
       <td>
         {{ optional($user->rank)->name }}
       </td>
       @if(empty($airline_view))
         <td>
-          <a href="{{ route('DBasic.airline', [$user->airline->icao ?? '']) }}">{{ optional($user->airline)->name }}</a>
+          <a href="{{ route('DBasic.airline', [$user->airline->icao ?? '']) }}" target="_blank">{{ optional($user->airline)->name }}</a>
         </td>
       @endif
       @if(!isset($type) || isset($type) && $type != 'hub')
         <td>
-          <a href="{{ route('DBasic.hub', [$user->home_airport_id ?? '']) }}">{{ $user->home_airport->full_name ?? $user->home_airport_id }}</a>
+          <a href="{{ route('DBasic.hub', [$user->home_airport_id ?? '']) }}" target="_blank">{{ $user->home_airport->full_name ?? $user->home_airport_id }}</a>
         </td>
       @endif
       @if(!isset($type) || isset($type) && $type != 'visitor')
