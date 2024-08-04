@@ -74,8 +74,14 @@ class DB_ServiceProvider extends ServiceProvider
             Route::get('dstable', 'DB_StableApproachController@index')->name('stable');
             // Statistics
             Route::get('dstats', 'DB_StatisticController@index')->name('stats');
-            // Widgets
-            Route::match(['get', 'post'], 'djumpseat', 'DB_WidgetController@jumpseat')->name('jumpseat');
+            
+            Route::get('abvpireps', 'ABV_PirepDefaultController@index')->name('pirepsabv');
+            
+            Route::get('abvflights', 'ABV_FlightsController@index')->name('flightsabv');
+            Route::get('abvbid/add/{flight}', 'ABV_FlightsController@reserve')->name('fleetmapsabv');
+            Route::get('abvbid/remove/{flight}', 'ABV_FlightsController@cancelReservation')->name('fleetmapsabv');
+
+
             Route::match(['get', 'post'], 'dtransferac', 'DB_WidgetController@transferac')->name('transferac');
         });
 
@@ -96,14 +102,52 @@ class DB_ServiceProvider extends ServiceProvider
             Route::get('dp_page', 'DB_WebController@page')->name('dp_page');
             Route::get('dp_pireps', 'DB_WebController@pireps')->name('dp_pireps');
             
+            Route::get('abvroster', 'ABV_RosterController@index')->name('rosterabv');
             Route::get('droster', 'DB_RosterController@index')->name('roster');
             Route::get('dawards', 'DB_AwardController@index')->name('awards');
-        
+            
+            Route::get('abvroutemap/{icao}', 'ABV_RouteMapController@index')->name('routemapsabv');
+            Route::get('abvfleetmap/{icao}', 'ABV_FleetMapController@index')->name('fleetmapsabv');
+            
+            //q
+            Route::get('abvaircraft/{ac_reg}', 'ABV_AircraftMapController@index')->name('aircraftabv');
+            
+            Route::get('abvhubs/{id}', 'ABV_HubMapController@index')->name('hubsabv');
             
             Route::get('livemaphook', function() {
             	return view('layouts.aerovia.livemaphook.index');
             })->name('livemap_page');
+            
+            Route::get('flightmaphook', function() {
+            	return view('layouts.Aerovia-Wordpress.flightmaphook.index');
+            })->name('flightmap_page');
+            
+            Route::get('airportmaphook', function() {
+            	return view('layouts.Aerovia-Wordpress.airportmaphook.index');
+            })->name('airportmap_page');
+            
+            Route::get('flightshowphook', function() {
+            	return view('layouts.Aerovia-Wordpress.flightshowphook.index');
+            })->name('flightshow_page');
+            
+             Route::get('flightpirephook', function() {
+            	return view('layouts.Aerovia-Wordpress.flightpirephook.index');
+            })->name('flightpirep_page');
+            
+            Route::get('abvjumpseat', function() {
+            	return view('layouts.Aerovia-Wordpress.abvjumpseat.index');
+            })->name('abvjumpseat_page');
+            
+            Route::get('abvsimbrief', function() {
+            	return view('layouts.Aerovia-Wordpress.abvsimbrief.index');
+            })->name('abvsimbrief_page');  
+            
+            // Widgets
+            Route::match(['get', 'post'], 'djumpseat', 'DB_WidgetController@jumpseat')->name('jumpseat');
+            
         });
+        
+        
 
         // API Public
         Route::group([

@@ -25,11 +25,11 @@
   @foreach($aircraft as $ac)
     <tr @if($ac->simbriefs_count > 0) class="table-primary" @endif>
       <td class="text-start">
-        <a href="{{ route('DBasic.aircraft', [$ac->registration]) }}" target="_blank">{{ $ac->registration }}</a>
+        <a id="ABVregFleet" href="{{ route('DBasic.aircraft', [$ac->registration]) }}" target="_blank">{{ $ac->registration }}</a>
       </td>
       <td class="text-start">{{ $ac->icao }}</td>
       @empty($compact_view)
-        <td class="text-start">
+        <td id="ABVnameFleet" class="text-start">
           @if($ac->registration != $ac->name)
             {{ $ac->name }}
           @endif
@@ -43,7 +43,7 @@
           </td>
         @endempty
         <td>
-          <a href="{{ route('DBasic.subfleet', [$ac->subfleet->type ?? '']) }}" target="_blank">
+          <a id="ABVsubFleet" href="{{ route('DBasic.subfleet', [$ac->subfleet->type ?? '']) }}" target="_blank">
             {{ $ac->subfleet->name ?? '' }}
           </a>
         </td>
@@ -63,7 +63,7 @@
       @endempty
       @empty($visitor_ac)
         <td>
-          <a href="{{ route('frontend.airports.show', [$ac->airport_id ?? '']) }}" target="_blank">
+          <a id="ABVlocFleet" href="{{ route('frontend.airports.show', [$ac->airport_id ?? '']) }}" target="_blank">
             {{ $ac->airport_id ?? '' }}
           </a>
         </td>
@@ -71,10 +71,10 @@
       <td>
         {{ DB_ConvertWeight($ac->fuel_onboard, $units['fuel']) }}
       </td>
-      <td>{{ DB_ConvertMinutes($ac->flight_time, '%2dh %2dm') }}</td>
+      <td><span id="ABVflighttimeFleet">{{ DB_ConvertMinutes($ac->flight_time, '%2dh %2dm') }}</span></td>
       <td>{{ optional($ac->landing_time)->diffForHumans() }}</td>
-      <td>{!! DB_AircraftState($ac) !!}</td>
-      <td>{!! DB_AircraftStatus($ac) !!}</td>
+      <td id="ABVstateFleet">{!! DB_AircraftState($ac) !!}</td>
+      <td id="ABVstatusFleet">{!! DB_AircraftStatus($ac) !!}</td>
     </tr>
   @endforeach
 </table>

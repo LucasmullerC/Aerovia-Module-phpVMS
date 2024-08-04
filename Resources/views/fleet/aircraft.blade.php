@@ -47,20 +47,16 @@
       {{-- Latest Pireps --}}
       @if($pireps)
         <div class="card mb-2">
-          <div class="card-header p-1">
-            <h5 class="m-1">
-              @lang('DBasic::common.reports')
-              <i class="fas fa-file-upload float-end"></i>
-            </h5>
-          </div>
-          <div class="card-body p-0 overflow-auto table-responsive">
-            @include('DBasic::pireps.table_compact', ['ac_page' => true])
-          </div>
-          <div class="card-footer p-0 px-1 small text-end">
-            @lang('DBasic::common.paginate', ['first' => $pireps->firstItem(), 'last' => $pireps->lastItem(), 'total' => $pireps->total()])
-          </div>
+            <div class="card-header p-1">
+                <h5 class="m-1">
+                    @lang('DBasic::common.reports')
+                    <i class="fas fa-file-upload float-end"></i>
+                </h5>
+            </div>
+            <div class="card-body p-0 overflow-auto table-responsive">
+                @include('DBasic::pireps.table_compact', ['ac_page' => true])
+            </div>
         </div>
-        {{ $pireps->links('pagination.default') }}
       @endif
 
       <div class="row row-cols-lg-2">
@@ -94,8 +90,8 @@
                 <table class="table table-sm table-borderless table-striped text-start mb-0">
                   @foreach($stats as $key => $value)
                     <tr>
-                      <th>{{ $key }}</th>
-                      <td class="text-end">{{ $value }}</td>
+                      <th id="infoacftABVkey">{{ $key }} </th>
+                      <td id="infoacftABVvalor" class="text-end">{{ $value }} </td>
                     </tr>
                   @endforeach
                 </table>

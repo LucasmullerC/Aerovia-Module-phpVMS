@@ -1,18 +1,18 @@
 <table class="table table-sm table-borderless table-striped align-middle text-center text-nowrap mb-0">
   <tr>
-    <th class="text-start">@sortablelink('registration', __('DBasic::common.reg'))</th>
-    <th class="text-start">@sortablelink('name', __('DBasic::common.name'))</th>
+    <th id="ABVregFleet" class="text-start">@sortablelink('registration', __('DBasic::common.reg'))</th>
+    <th id="ABVnameFleet" class="text-start">@sortablelink('name', __('DBasic::common.name'))</th>
     @empty($hub_ac)
       <th>@lang('DBasic::common.base')</th>
     @endempty
     @empty($visitor_ac)
-      <th>@sortablelink('airport_id', __('DBasic::common.location'))</th>
+      <th id="ABVlocFleet">@sortablelink('airport_id', __('DBasic::common.location'))</th>
     @endempty
     <th>@sortablelink('fuel_onboard', __('DBasic::common.fuelob'))</th>
-    <th>@sortablelink('flight_time', __('DBasic::common.btime'))</th>
+    <th id="ABVflighttimeFleet">@sortablelink('flight_time', __('DBasic::common.btime'))</th>
     <th>@lang('DBasic::common.lastlnd')</th>
-    <th>@sortablelink('state', __('DBasic::common.state'))</th>
-    <th>@sortablelink('status', __('DBasic::common.status'))</th>
+    <th id="ABVstateFleet">@sortablelink('state', __('DBasic::common.state'))</th>
+    <th id="ABVstatusFleet">@sortablelink('status', __('DBasic::common.status'))</th>
   </tr>
   @foreach($aircraft as $ac)
     <tr @if($ac->simbriefs_count > 0) class="table-primary" @endif>

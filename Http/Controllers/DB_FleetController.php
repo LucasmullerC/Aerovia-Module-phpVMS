@@ -133,7 +133,10 @@ class DB_FleetController extends Controller
         $where = ['aircraft_id' => $aircraft->id, 'state' => PirepState::ACCEPTED, 'status' => PirepStatus::ARRIVED];
         $with_pirep = ['dpt_airport', 'arr_airport', 'user', 'airline', 'field_values'];
 
-        $pireps = Pirep::with($with_pirep)->where($where)->orderby('submitted_at', 'desc')->paginate(10);
+        $pireps = Pirep::with($with_pirep)
+        ->where($where)
+        ->orderBy('submitted_at', 'desc')
+        ->get();
 
         if (filled($pireps)) {
             $curr_airport = $aircraft->airport_id;

@@ -160,7 +160,12 @@ class DB_WidgetController extends Controller
     // JumpSeat Travel
     public function jumpseat(Request $request)
     {
-        $user = User::with('journal')->find(Auth::id());
+        
+        $userId = $request->userid;
+        if(!$userId){
+            $userId = Auth::id();
+        }
+        $user = User::with('journal')->find($userId);
         $user_location = isset($user->curr_airport_id) ? $user->curr_airport_id : $user->home_airport_id;
 
         $price = $request->price;

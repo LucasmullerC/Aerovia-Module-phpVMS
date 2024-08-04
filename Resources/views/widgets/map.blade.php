@@ -1,9 +1,9 @@
 <link href="{{ public_asset('/aerovia/style-aev.css') }}" rel="stylesheet" />
 @if(isset($flights) && $flights > 0 || !isset($flights) && count($mapAirports) > 0 || !isset($flights) && count($mapHubs) > 0)
-    <div class="modal-dialog mx-auto" style="max-width: 100%;">
+    <div class="mx-auto" style="max-width: 100%;">
       <div class="modal-content shadow-none p-0">
-        <div class="modal-body border-0 p-0">
-          <div id="{{ $mapsource }}" style="width: 100%; height: 80vh;"></div>
+        <div class="modal-body border-0 p-0" style="height: 100vh;">
+          <div id="{{ $mapsource }}" style="width: 100%; height: 100%;"></div>
         </div>
         <div class="modal-footer border-0 p-0 small text-end">
           <span>

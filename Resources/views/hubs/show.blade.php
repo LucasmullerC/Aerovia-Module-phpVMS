@@ -8,7 +8,7 @@
       <div class="card mb-2">
         <div class="card-header p-1">
           <h5 class="m-1">
-            {{ $hub->name }}
+            <span id="ABVdhubsAirportName">{{ $hub->name }}</span>
             <i class="fas fa-info float-end"></i>
           </h5>
         </div>
@@ -16,15 +16,15 @@
           <table class="table table-sm table-borderless table-striped align-middle text-start text-nowrap mb-0">
             <tr>
               <th>@lang('DBasic::common.icao')</th>
-              <td class="text-end">{{ $hub->icao }}</td>
+              <td class="text-end" id="ABVdhubsIcao">{{ $hub->icao }}</td>
             </tr>
             <tr>
               <th>@lang('DBasic::common.iata')</th>
-              <td class="text-end">{{ $hub->iata ?? '--' }}</td>
+              <td class="text-end" id="ABVdhubsIata">{{ $hub->iata ?? '--' }}</td>
             </tr>
             <tr>
               <th>@lang('DBasic::common.location')</th>
-              <td class="text-end">
+              <td class="text-end" id="ABVdhubsLocation">
                 {{ $hub->location }}
                 @if (strlen($hub->country) == 2)
                   {{ ' | '.$country->alpha2($hub->country)['name'].' ('.$hub->country.')' }}
@@ -35,29 +35,29 @@
             </tr>
             <tr>
               <th>@lang('DBasic::common.timezone')</th>
-              <td class="text-end">{{ $hub->timezone }}</a></td>
+              <td class="text-end" id="ABVdhubsTimezone">{{ $hub->timezone }}</a></td>
             </tr>
             @if($hub->ground_handling_cost > 0)
               <tr>
                 <th>@lang('DBasic::common.groundhc')</th>
-                <td class="text-end">{{ number_format($hub->ground_handling_cost).' '.$units['currency'] }}</td>
+                <td class="text-end" id="ABVdhubsCost">{{ number_format($hub->ground_handling_cost).' '.$units['currency'] }}</td>
               </tr>
             @endif
             @if($hub->fuel_100ll_cost > 0)
               <tr>
                 <th>@lang('DBasic::common.fuelc') | 100LL</th>
-                <td class="text-end">{{ DB_FuelCost($hub->fuel_100ll_cost, $units['fuel'], $units['currency']) }}</tr>
+                <td class="text-end" id="ABVdhubsCost">{{ DB_FuelCost($hub->fuel_100ll_cost, $units['fuel'], $units['currency']) }}</tr>
             @endif
             @if($hub->fuel_mogas_cost > 0)
               <tr>
                 <th>@lang('DBasic::common.fuelc') | MOGAS</th>
-                <td class="text-end">{{ DB_FuelCost($hub->fuel_mogas_cost, $units['fuel'], $units['currency']) }}</td>
+                <td class="text-end" id="ABVdhubsCost">{{ DB_FuelCost($hub->fuel_mogas_cost, $units['fuel'], $units['currency']) }}</td>
               </tr>
             @endif
             @if($hub->fuel_jeta_cost > 0)
               <tr>
                 <th>@lang('DBasic::common.fuelc') | JETA1</th>
-                <td class="text-end">{{ DB_FuelCost($hub->fuel_jeta_cost, $units['fuel'], $units['currency']) }}</td>
+                <td class="text-end" id="ABVdhubsCost">{{ DB_FuelCost($hub->fuel_jeta_cost, $units['fuel'], $units['currency']) }}</td>
               </tr>
             @endif
           </table>
@@ -65,16 +65,16 @@
         @if(filled($sundetails))
           <div class="card-footer p-1 fw-bold small text-center">
             @if(isset($sundetails['twilight_begin']))
-              <i class="fas fa-cloud-sun mx-2" title="@lang('DBasic::widgets.twilight_begin')"></i>{{ $sundetails['twilight_begin'] }}
+              <i class="fas fa-cloud-sun mx-2" title="@lang('DBasic::widgets.twilight_begin')"></i><span id="ABVdhubsTwilightBegin">{{ $sundetails['twilight_begin'] }}</span>
             @endif
             @if(isset($sundetails['sunrise']))
-              <i class="fas fa-sun mx-2" title="@lang('DBasic::widgets.sunrise')"></i>{{ $sundetails['sunrise'] }}
+              <i class="fas fa-sun mx-2" title="@lang('DBasic::widgets.sunrise')"></i><span id="ABVdhubsSunrise">{{ $sundetails['sunrise'] }}</span>
             @endif
             @if(isset($sundetails['sunset']))
-              <i class="fas fa-moon mx-2" title="@lang('DBasic::widgets.sunset')"></i>{{ $sundetails['sunset'] }}
+              <i class="fas fa-moon mx-2" title="@lang('DBasic::widgets.sunset')"></i><span id="ABVdhubsSunset">{{ $sundetails['sunset'] }}</span>
             @endif
             @if(isset($sundetails['twilight_end']))
-              <i class="fas fa-cloud-moon mx-2" title="@lang('DBasic::widgets.twilight_end')"></i>{{ $sundetails['twilight_end'] }}
+              <i class="fas fa-cloud-moon mx-2" title="@lang('DBasic::widgets.twilight_end')"></i><span id="ABVdhubsTwilightEnd">{{ $sundetails['twilight_end'] }}</span>
             @endif
           </div>
         @endif

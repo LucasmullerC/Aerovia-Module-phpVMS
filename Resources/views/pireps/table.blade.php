@@ -65,11 +65,10 @@
             <a href="{{ route('DBasic.aircraft', [$pirep->aircraft->registration ?? '']) }}">{{ optional($pirep->aircraft)->ident }}</a>
           </td>
         @endif
-        <td>
+        <td id="ABVFlightTimeDpireps">
           {{ DB_ConvertMinutes($pirep->flight_time) }}
           @ability('admin', 'admin-access')
             @if(($pirep->flight_time - $pirep->planned_flight_time) > 20)
-              <i class="fas fa-clock text-danger mx-1" title="Check Flight Time"></i>
             @endif
           @endability
         </td>
@@ -81,22 +80,28 @@
             @endif
           @endability
         </td>
-        @ability('admin', 'admin-access')
-          <td>{{ $pirep->score }}</td>
-          <td>@if($pirep->landing_rate) {{ $pirep->landing_rate.' ft/min' }} @endif</td>
+          <td id="ABVScoreDpireps">{{ $pirep->score }}</td>
+          <td id="ABVLandingRateDpireps" >@if($pirep->landing_rate) {{ $pirep->landing_rate.' ft/min' }} @endif</td>
           @if(Theme::getSetting('gen_stable_approach'))
             <td>@widget('DBasic::StableApproach', ['pirep' => $pirep])</td>
           @endif
-        @endability
         @if(DB_Setting('dbasic.networkcheck', false))
-          <td>{!! DB_NetworkPresence($pirep, 'badge') !!}</td>
+          <td id="AEVNetworkPireps">{!! DB_NetworkPresence($pirep, 'badge') !!}</td>
         @endif
         <td class="text-end">
-          <a href="{{ route('frontend.users.show.public', [$pirep->user_id]) }}">
+          <a href="{{ route('frontend.users.show.public', [$pirep->user_id]) }}" id="ABVPilotNameDpireps">
             @if(Theme::getSetting('roster_ident'))
               {{ optional($pirep->user)->ident.' - ' }}
             @endif
             {{ optional($pirep->user)->name_private }}
+          </a>
+        </td>
+        <td class="text-end">
+          <a href="{{ route('frontend.users.show.public', [$pirep->user_id]) }}" id="ABVPilotNameDpireps">
+            @if(Theme::getSetting('roster_ident'))
+              {{ optional($pirep->user)->ident.' - ' }}
+            @endif
+             <img src="{{ optional($pirep->user)->rank->image_url }}" id="AEVRankImage">
           </a>
         </td>
         <td class="text-end">

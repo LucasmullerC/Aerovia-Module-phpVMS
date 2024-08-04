@@ -15,20 +15,9 @@ class JumpSeat extends Widget
         $base_price = is_numeric($this->config['base']) ? $this->config['base'] : 0.13;
         $fixed_dest = $this->config['dest'];
         $hubs = is_bool($this->config['hubs']) ? $this->config['hubs'] : false;
-        $userId = request()->query('user_id');
-        if($userId){
-            $user = \App\Models\User::find($userId);
-            $is_possible = (optional($user)->curr_airport_id != $fixed_dest) ? true : false;
-            $is_visible = true;
-        }
-        else{
-            $is_possible = (optional(Auth::user())->curr_airport_id != $fixed_dest) ? true : false;
-            $is_visible = Auth::check();
-        }
-        
-        //$is_possible = (optional(Auth::user())->curr_airport_id != $fixed_dest) ? true : false;
+        $is_possible = (optional(Auth::user())->curr_airport_id != $fixed_dest) ? true : false;
         $price = $this->config['price'];
-    
+
         if ($price != 'auto' && $price != 'free' && !is_numeric($price)) {
             $price = 'auto';
         }
@@ -57,7 +46,7 @@ class JumpSeat extends Widget
             'icon_color'  => $icon_color,
             'icon_title'  => $icon_title,
             'is_possible' => $is_possible,
-            'is_visible'  => $is_visible,
+            'is_visible'  => Auth::check(),
             'price'       => $price,
         ]);
     }

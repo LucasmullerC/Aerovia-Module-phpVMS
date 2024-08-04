@@ -7,18 +7,18 @@
       <div class="col-md">
         <div class="card mb-2">
           <div class="card-header p-1">
-            <h5 class="m-1">
+            <h5 id="ABVawardname" class="m-1">
               {{ $award->name }}
               <i class="fas fa-trophy float-end"></i>
             </h5>
           </div>
           <div class="card-body p-1 text-center">
             @if($award->image_url)
-              <img class="img-mh150" src="{{ $award->image_url }}" alt="{{ $award->name }}" title="{{ $award->description }}">
+              <img id="ABVawardimage" class="img-mh150" src="{{ $award->image_url }}" alt="{{ $award->name }}" title="{{ $award->description }}">
             @endif
           </div>
           {{--}}
-          <div class="card-footer p-1 text-center small">
+          <div id="ABVawardDes" class="card-footer p-1 text-center small">
             {{ $award->description }}
           </div>
           {{--}}
